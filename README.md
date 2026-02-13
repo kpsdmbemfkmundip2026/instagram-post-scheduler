@@ -1,2 +1,0 @@
-# instagram-post-scheduler
-WEBSITE POSTING SCHEDULER BIDANG K&amp;PSDM BEM FKM UNDIP 2026 
