@@ -3,135 +3,164 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>IG Feed Scheduler • 3-Gradient SOP</title>
+  <title>IG FEED SCHEDULER</title>
 
   <style>
     :root{
-      --bg:#070A12;
+      --bg:#05050A;
       --card:rgba(255,255,255,.06);
-      --stroke:rgba(255,255,255,.12);
+      --stroke:rgba(255,255,255,.14);
       --text:#EAF0FF;
-      --muted:rgba(234,240,255,.7);
-      --shadow: 0 20px 60px rgba(0,0,0,.45);
-      --r:22px;
+      --muted:rgba(234,240,255,.72);
+      --shadow: 0 25px 80px rgba(0,0,0,.55);
+      --r:24px;
 
-      /* NEW SOP gradients (your exact colors) */
+      /* Brand Colors */
       --purple:#6A367A;
       --yellow:#FFCC00;
       --blue:#00167A;
 
-      --g1: linear-gradient(135deg,var(--yellow),var(--purple)); /* Kuning–Ungu */
-      --g2: linear-gradient(135deg,var(--blue),var(--purple));   /* Biru–Ungu */
-      --g3: linear-gradient(135deg,var(--yellow),var(--blue));   /* Kuning–Biru */
+      /* SOP Gradients */
+      --g1: linear-gradient(135deg,var(--yellow),var(--purple));
+      --g2: linear-gradient(135deg,var(--blue),var(--purple));
+      --g3: linear-gradient(135deg,var(--yellow),var(--blue));
     }
 
     *{box-sizing:border-box}
 
+    /* ===== Moving Gradient Background ===== */
     body{
       margin:0;
       font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
       color:var(--text);
-      background:
-        radial-gradient(900px 600px at 15% 10%, rgba(106,54,122,.35), transparent 60%),
-        radial-gradient(900px 600px at 90% 30%, rgba(0,22,122,.25), transparent 60%),
-        radial-gradient(700px 500px at 40% 90%, rgba(255,204,0,.18), transparent 60%),
-        var(--bg);
       min-height:100vh;
+      background:linear-gradient(-45deg,#0a0a12,#1a0630,#2b0f4a,#05050a);
+      background-size:400% 400%;
+      animation:bgMove 14s ease infinite;
     }
 
-    .wrap{max-width:1100px;margin:0 auto;padding:28px 18px 60px}
+    @keyframes bgMove{
+      0%{background-position:0% 50%}
+      50%{background-position:100% 50%}
+      100%{background-position:0% 50%}
+    }
 
-    /* ===== Animations ===== */
-    @keyframes fadeUp{
-      from{opacity:0; transform:translateY(14px)}
-      to{opacity:1; transform:translateY(0)}
+    .wrap{max-width:1150px;margin:0 auto;padding:26px 18px 70px}
+
+    /* ===== Smooth Entrance Animations ===== */
+    @keyframes floatIn{
+      from{opacity:0; transform:translateY(18px) scale(.98)}
+      to{opacity:1; transform:translateY(0) scale(1)}
     }
 
     header{
-      display:flex;
-      align-items:flex-end;
-      justify-content:space-between;
-      gap:14px;
-      margin-bottom:18px;
-      animation:fadeUp .7s ease;
+      text-align:center;
+      margin-bottom:22px;
+      animation:floatIn .9s ease;
     }
 
-    .title{display:flex;flex-direction:column;gap:6px}
+    .brandRow{
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      gap:12px;
+    }
+
+    /* Simple logo placeholder */
+    .logo{
+      width:46px;height:46px;
+      border-radius:16px;
+      border:1px solid rgba(255,255,255,.18);
+      box-shadow:0 0 25px rgba(106,54,122,.45);
+      overflow:hidden;
+      animation:logoPulse 2.6s ease-in-out infinite;
+    }
+
+    .logo img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+    }
+
+    @keyframes logoPulse{
+      0%,100%{transform:scale(1); filter:drop-shadow(0 0 0 rgba(255,255,255,0))}
+      50%{transform:scale(1.08); filter:drop-shadow(0 0 14px rgba(255,255,255,.25))}
+    }
 
     h1{
       margin:0;
-      font-size:clamp(20px,3vw,34px);
-      letter-spacing:.2px;
+      font-size:clamp(22px,3vw,40px);
+      letter-spacing:2px;
+      font-weight:900;
     }
 
     .sub{
+      margin-top:6px;
       color:var(--muted);
       font-size:14px;
       line-height:1.35;
     }
 
-    .grid{display:grid;grid-template-columns: 380px 1fr;gap:16px}
+    .grid{display:grid;grid-template-columns:390px 1fr;gap:18px}
     @media (max-width: 900px){
       .grid{grid-template-columns:1fr}
     }
 
     .card{
-      background:var(--card);
+      background:rgba(255,255,255,.05);
       border:1px solid var(--stroke);
       border-radius:var(--r);
       box-shadow:var(--shadow);
       overflow:hidden;
-      animation:fadeUp .9s ease;
+      animation:floatIn 1.05s ease;
+      backdrop-filter: blur(14px);
     }
 
     .card h2{
       margin:0;
-      padding:16px 16px 10px;
+      padding:18px 18px 10px;
       font-size:15px;
+      letter-spacing:.6px;
+      text-transform:uppercase;
       color:rgba(234,240,255,.92);
     }
 
-    form{
-      padding:0 16px 16px;
-      display:flex;
-      flex-direction:column;
-      gap:10px;
-    }
-
+    form{padding:0 18px 18px;display:flex;flex-direction:column;gap:10px}
     label{font-size:12px;color:var(--muted)}
 
     input{
       width:100%;
-      padding:11px 12px;
-      border-radius:14px;
-      border:1px solid rgba(255,255,255,.14);
+      padding:12px 12px;
+      border-radius:16px;
+      border:1px solid rgba(255,255,255,.15);
       background:rgba(0,0,0,.25);
       color:var(--text);
       outline:none;
-      transition:.2s;
+      transition:.25s;
     }
-    input:focus{border-color:rgba(255,204,0,.7)}
-
-    .row{display:grid;grid-template-columns:1fr;gap:10px}
+    input:focus{
+      border-color:rgba(106,54,122,.9);
+      box-shadow:0 0 0 3px rgba(106,54,122,.25);
+    }
 
     .btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:4px}
 
     button{
       border:0;
-      padding:11px 14px;
-      border-radius:14px;
+      padding:11px 15px;
+      border-radius:16px;
       cursor:pointer;
-      font-weight:700;
-      letter-spacing:.2px;
-      transition:.2s;
+      font-weight:800;
+      letter-spacing:.3px;
+      transition:.25s;
     }
 
-    /* Primary button pure purple */
     .primary{
       background:var(--purple);
       color:white;
     }
-    .primary:hover{transform:translateY(-2px);opacity:.9}
+    .primary:hover{transform:translateY(-3px);box-shadow:0 12px 25px rgba(106,54,122,.35)}
 
     .ghost{
       background:transparent;
@@ -140,24 +169,27 @@
       font-weight:600;
     }
 
-    .tableWrap{padding:14px 14px 18px}
+    /* ===== Table Scroll on Mobile ===== */
+    .tableWrap{padding:16px 16px 18px}
 
-    .toolbar{
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      gap:10px;
-      padding:0 2px 12px;
-      flex-wrap:wrap;
+    .scrollX{
+      overflow-x:auto;
+      -webkit-overflow-scrolling:touch;
+      padding-bottom:6px;
     }
 
-    table{width:100%;border-collapse:separate;border-spacing:0 10px}
+    table{
+      min-width:760px;
+      width:100%;
+      border-collapse:separate;
+      border-spacing:0 10px;
+    }
 
     th{
       text-align:left;
       font-size:11px;
       color:rgba(234,240,255,.55);
-      font-weight:600;
+      font-weight:700;
       padding:0 10px;
     }
 
@@ -166,10 +198,6 @@
       background:rgba(255,255,255,.04);
       border-top:1px solid rgba(255,255,255,.10);
       border-bottom:1px solid rgba(255,255,255,.10);
-    }
-
-    tr{
-      animation:fadeUp .4s ease;
     }
 
     tr td:first-child{border-left:1px solid rgba(255,255,255,.10);border-radius:16px 0 0 16px}
@@ -182,26 +210,28 @@
       padding:7px 10px;
       border-radius:999px;
       font-size:12px;
-      color:#0B0F1A;
-      font-weight:800;
+      color:#05050A;
+      font-weight:900;
     }
-
     .dot{width:10px;height:10px;border-radius:999px;background:#fff;opacity:.95}
 
     .actions{display:flex;gap:8px;flex-wrap:wrap}
 
     .mini{
       padding:8px 10px;
-      border-radius:12px;
+      border-radius:14px;
       font-size:12px;
-      font-weight:700;
+      font-weight:800;
       border:1px solid rgba(255,255,255,.18);
-      background:rgba(0,0,0,.18);
+      background:rgba(0,0,0,.20);
       color:var(--text);
       cursor:pointer;
       transition:.2s;
     }
-    .mini:hover{transform:scale(1.03)}
+    .mini:hover{transform:scale(1.05)}
+
+    /* Drag highlight */
+    .dragging{opacity:.5}
 
     .empty{
       padding:22px;
@@ -212,17 +242,28 @@
       margin-top:10px;
     }
 
+    footer{
+      text-align:center;
+      margin-top:26px;
+      color:rgba(234,240,255,.55);
+      font-size:12px;
+    }
+
   </style>
 </head>
 <body>
   <div class="wrap">
 
+    <!-- HEADER CENTER + LOGO -->
     <header>
-      <div class="title">
-        <h1>Instagram Feed Scheduler</h1>
-        <div class="sub">Bidang Keorganisasian dan Pengembangan Sumber Daya Manusia</div>
-        <div class="sub">BEM FKM Undip 2026, Kabinet Arunika</div>
+      <div class="brandRow">
+        <div class="logo">
+          <img src="https://i.imgur.com/7cvCZVb.png" alt="Logo" />
+        </div>
+        <h1>INSTAGRAM FEEDS SCHEDULER</h1>
       </div>
+      <div class="sub">Bidang Keorganisasian dan Pengembangan Sumber Daya Manusia</div>
+      <div class="sub">BEM FKM Undip 2026, Kabinet Arunika</div>
     </header>
 
     <div class="grid">
@@ -230,8 +271,8 @@
       <!-- FORM -->
       <section class="card">
         <h2>Schedule or Reschedule Form</h2>
-
         <form id="postForm">
+
           <div>
             <label>Nama Pengisi</label>
             <input id="nama" required />
@@ -251,31 +292,34 @@
             <button class="primary" type="submit">Simpan Jadwal</button>
             <button class="ghost" type="button" id="resetBtn">Reset Form</button>
           </div>
+
         </form>
       </section>
 
-      <!-- TABLE -->
+      <!-- TABLE + DRAG DROP -->
       <section class="card">
         <div class="tableWrap">
 
-          <div class="toolbar">
+          <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;">
             <h2 style="padding:0;margin:0">Jadwal Posting</h2>
             <button class="mini" id="clearAll">Hapus Semua</button>
           </div>
 
-          <table>
-            <thead>
-              <tr>
-                <th>Urutan</th>
-                <th>Warna SOP</th>
-                <th>Nama</th>
-                <th>Judul</th>
-                <th>Waktu Posting</th>
-                <th>Reschedule/Hapus</th>
-              </tr>
-            </thead>
-            <tbody id="tbody"></tbody>
-          </table>
+          <div class="scrollX">
+            <table>
+              <thead>
+                <tr>
+                  <th>Urutan</th>
+                  <th>Warna SOP</th>
+                  <th>Nama</th>
+                  <th>Judul</th>
+                  <th>Waktu Posting</th>
+                  <th>Reschedule/Hapus</th>
+                </tr>
+              </thead>
+              <tbody id="tbody"></tbody>
+            </table>
+          </div>
 
           <div id="empty" class="empty" style="display:none">
             Belum ada jadwal. Tambahkan posting pertama ✨
@@ -285,10 +329,15 @@
       </section>
 
     </div>
+
+    <footer>
+      © Bidang Keorganisasian dan Pengembangan Sumber Daya Manusia — BEM FKM Undip 2026
+    </footer>
+
   </div>
 
 <script>
-  // ====== Gradient Rotation SOP ======
+  // ====== SOP Gradient Rotation ======
   const SOP = [
     { name: "Kuning–Ungu", css: getComputedStyle(document.documentElement).getPropertyValue('--g1').trim() },
     { name: "Biru–Ungu",   css: getComputedStyle(document.documentElement).getPropertyValue('--g2').trim() },
@@ -313,6 +362,7 @@
 
   const sortByTime = (a,b) => new Date(a.waktu) - new Date(b.waktu);
 
+  // ====== Render Table ======
   function render(){
     posts.sort(sortByTime);
 
@@ -337,6 +387,9 @@
       `;
 
       const tr = document.createElement('tr');
+      tr.draggable = true;
+      tr.dataset.id = p.id;
+
       tr.innerHTML = `
         <td><b>#${idx+1}</b></td>
         <td>${badge}</td>
@@ -350,13 +403,60 @@
           </div>
         </td>
       `;
+
       tbody.appendChild(tr);
     });
 
+    enableDragDrop();
     save(posts);
   }
 
+  // ====== Drag Drop Reorder ======
+  // ====== Drag Drop Reorder (FIXED) ======
+  function enableDragDrop(){
+    const tbody = document.getElementById("tbody");
+    const rows = document.querySelectorAll("#tbody tr");
 
+    let dragSrc = null;
+
+    rows.forEach(row => {
+      row.addEventListener("dragstart", (e) => {
+        dragSrc = row;
+        row.classList.add("dragging");
+        e.dataTransfer.effectAllowed = "move";
+      });
+
+      row.addEventListener("dragend", () => {
+        row.classList.remove("dragging");
+        dragSrc = null;
+      });
+
+      row.addEventListener("dragover", (e) => {
+        e.preventDefault();
+        const target = row;
+        if(!dragSrc || target === dragSrc) return;
+
+        const rect = target.getBoundingClientRect();
+        const offset = e.clientY - rect.top;
+
+        if(offset > rect.height / 2){
+          tbody.insertBefore(dragSrc, target.nextSibling);
+        } else {
+          tbody.insertBefore(dragSrc, target);
+        }
+      });
+
+      row.addEventListener("drop", (e) => {
+        e.preventDefault();
+        const ids = [...document.querySelectorAll("#tbody tr")].map(r => r.dataset.id);
+        posts = ids.map(id => posts.find(p => p.id === id));
+        save(posts);
+        render();
+      });
+    });
+  }
+
+  // ====== CRUD ======
   function uid(){
     return Math.random().toString(16).slice(2) + Date.now().toString(16);
   }
@@ -406,8 +506,14 @@
   document.getElementById('resetBtn').addEventListener('click', resetForm);
 
   document.getElementById('clearAll').addEventListener('click', ()=>{
+    if(posts.length === 0){
+      alert('Belum ada jadwal untuk dihapus.');
+      return;
+    }
+
     if(confirm('Yakin hapus semua jadwal?')){
       posts = [];
+      localStorage.removeItem(KEY);
       resetForm();
       render();
     }
